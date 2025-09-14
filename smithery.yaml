@@ -1,14 +1,23 @@
 # Smithery.ai configuration for Voice Agent MCP Server
+testConfig:
+  defaultVoiceProvider: "vapi"
+  vapiPublicKey: "test-vapi-key-12345"
+  vapiAssistantId: "test-assistant-id-67890"
+  vapiBaseUrl: "https://api.vapi.ai"
+  openaiApiKey: "sk-test-openai-key-abcdef"
+  openaiModel: "gpt-4o"
+  openaiVoice: "alloy"
+
 startCommand:
-  type: stdio
-  testConfig:
-    defaultVoiceProvider: "vapi"
-    vapiPublicKey: "test-key"
-    vapiAssistantId: "test-assistant"
-    vapiBaseUrl: "https://api.vapi.ai"
+  type: remote_exec
   configSchema:
     type: object
     properties:
+      serverUrl:
+        type: string
+        default: "http://localhost:3002"
+        title: "Server URL"
+        description: "URL of the remote MCP server"
       defaultVoiceProvider:
         type: string
         enum: ["vapi", "openai"]
@@ -43,35 +52,23 @@ startCommand:
         default: "alloy"
         title: "OpenAI Voice"
         description: "OpenAI voice to use"
-    required: []
+    required: ["serverUrl", "defaultVoiceProvider"]
   commandFunction: |
     (config) => {
-      const env = {};
-      
-      // Set default voice provider
-      if (config.defaultVoiceProvider) {
-        env.DEFAULT_VOICE_PROVIDER = config.defaultVoiceProvider;
-      }
-      
-      // Set OpenAI configuration if provided
-      if (config.openaiApiKey) {
-        env.OPENAI_API_KEY = config.openaiApiKey;
-        env.OPENAI_MODEL = config.openaiModel || "gpt-4o";
-        env.OPENAI_VOICE = config.openaiVoice || "alloy";
-      }
-      
-      // Set VAPI configuration if provided
-      if (config.vapiPublicKey) {
-        env.VAPI_PUBLIC_KEY = config.vapiPublicKey;
-        env.VAPI_ASSISTANT_ID = config.vapiAssistantId;
-        env.VAPI_BASE_URL = config.vapiBaseUrl || "https://api.vapi.ai";
-      }
-      
       return {
-        "command": "node",
+        "command": "echo",
         "args": [
-          "dist/index.js"
+          "Connecting to remote MCP server at " + config.serverUrl
         ],
-        "env": env
+        "env": {
+          "MCP_SERVER_URL": config.serverUrl,
+          "DEFAULT_VOICE_PROVIDER": config.defaultVoiceProvider,
+          "OPENAI_API_KEY": config.openaiApiKey || "",
+          "VAPI_PUBLIC_KEY": config.vapiPublicKey || "",
+          "VAPI_ASSISTANT_ID": config.vapiAssistantId || "",
+          "VAPI_BASE_URL": config.vapiBaseUrl || "https://api.vapi.ai",
+          "OPENAI_MODEL": config.openaiModel || "gpt-4o",
+          "OPENAI_VOICE": config.openaiVoice || "alloy"
+        }
       };
     }
