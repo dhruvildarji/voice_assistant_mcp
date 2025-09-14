@@ -1,0 +1,68 @@
+# Smithery.ai configuration for Voice Agent MCP Server
+startCommand:
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP
+    type: object
+    properties:
+      defaultVoiceProvider:
+        type: string
+        enum: ["vapi", "openai"]
+        default: "vapi"
+        description: "Default voice provider to use (vapi or openai)"
+      openaiApiKey:
+        type: string
+        description: "OpenAI API key (required if using OpenAI provider)"
+      vapiPublicKey:
+        type: string
+        description: "VAPI public key (required if using VAPI provider)"
+      vapiAssistantId:
+        type: string
+        description: "VAPI assistant ID (required if using VAPI provider)"
+      vapiBaseUrl:
+        type: string
+        default: "https://api.vapi.ai"
+        description: "VAPI base URL"
+      openaiModel:
+        type: string
+        default: "gpt-4o"
+        description: "OpenAI model to use"
+      openaiVoice:
+        type: string
+        enum: ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
+        default: "alloy"
+        description: "OpenAI voice to use"
+    required: []
+  commandFunction:
+    # A function that produces the CLI command to start the MCP on stdio
+    |-
+    (config) => {
+      const env = {};
+      
+      // Set default voice provider
+      if (config.defaultVoiceProvider) {
+        env.DEFAULT_VOICE_PROVIDER = config.defaultVoiceProvider;
+      }
+      
+      // Set OpenAI configuration if provided
+      if (config.openaiApiKey) {
+        env.OPENAI_API_KEY = config.openaiApiKey;
+        env.OPENAI_MODEL = config.openaiModel || "gpt-4o";
+        env.OPENAI_VOICE = config.openaiVoice || "alloy";
+      }
+      
+      // Set VAPI configuration if provided
+      if (config.vapiPublicKey) {
+        env.VAPI_PUBLIC_KEY = config.vapiPublicKey;
+        env.VAPI_ASSISTANT_ID = config.vapiAssistantId;
+        env.VAPI_BASE_URL = config.vapiBaseUrl || "https://api.vapi.ai";
+      }
+      
+      return {
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": env
+      };
+    }
