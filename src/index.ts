@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
@@ -614,6 +612,14 @@ class VoiceAgentMCPServer {
   }
 }
 
-// Start the server
-const server = new VoiceAgentMCPServer();
-server.run().catch(console.error);
+// Export the createServer function for Smithery
+export function createServer() {
+  const server = new VoiceAgentMCPServer();
+  return server;
+}
+
+// If running directly (not imported), start the server
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const server = new VoiceAgentMCPServer();
+  server.run().catch(console.error);
+}

@@ -33,9 +33,7 @@ startCommand:
         default: "alloy"
         description: "OpenAI voice to use"
     required: []
-  commandFunction:
-    # A function that produces the CLI command to start the MCP on stdio
-    |-
+  commandFunction: |
     (config) => {
       const env = {};
       
