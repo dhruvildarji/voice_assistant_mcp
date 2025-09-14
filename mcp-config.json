@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "voice-agent": {
+      "command": "node",
+      "args": ["dist/index.js"],
+      "env": {
+        "DEFAULT_VOICE_PROVIDER": "vapi",
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "VAPI_PUBLIC_KEY": "${VITE_VAPI_PUBLIC_KEY}",
+        "VAPI_ASSISTANT_ID": "${VITE_VAPI_ASSISTANT_ID}",
+        "VAPI_BASE_URL": "https://api.vapi.ai"
+      }
+    }
+  }
+}

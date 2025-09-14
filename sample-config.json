@@ -1,0 +1,166 @@
+{
+  "enterprise": {
+    "name": "TechCorp Solutions",
+    "industry": "retail",
+    "description": "Leading technology solutions provider for retail businesses",
+    "headquarters": "San Francisco, CA, USA",
+    "website": "https://www.techcorp.com",
+    "supportHours": "24/7",
+    "languages": ["English", "Spanish"],
+    "contactInfo": {
+      "phone": "+1-800-TECHCORP",
+      "email": "support@techcorp.com",
+      "whatsapp": "+1-800-TECH-HELP",
+      "chat": "https://techcorp.com/chat"
+    }
+  },
+  "apis": [
+    {
+      "name": "Product Catalog API",
+      "description": "Real-time product information and availability",
+      "baseUrl": "https://api.techcorp.com",
+      "endpoints": [
+        {
+          "name": "get_product_info",
+          "path": "/products/{productId}",
+          "method": "GET",
+          "description": "Get detailed product information",
+          "parameters": [
+            {
+              "name": "productId",
+              "type": "string",
+              "required": true,
+              "description": "Product identifier",
+              "example": "PROD-12345"
+            }
+          ],
+          "responseFormat": "JSON",
+          "voiceResponseTemplate": "The product {productName} is {availability} and costs ${price}."
+        },
+        {
+          "name": "search_products",
+          "path": "/products/search",
+          "method": "GET",
+          "description": "Search for products by name or category",
+          "parameters": [
+            {
+              "name": "query",
+              "type": "string",
+              "required": true,
+              "description": "Search query",
+              "example": "laptop"
+            },
+            {
+              "name": "category",
+              "type": "string",
+              "required": false,
+              "description": "Product category",
+              "example": "electronics"
+            }
+          ],
+          "responseFormat": "JSON",
+          "voiceResponseTemplate": "I found {count} products matching your search for '{query}'."
+        }
+      ],
+      "authentication": {
+        "type": "api_key",
+        "header": "X-API-Key"
+      }
+    },
+    {
+      "name": "Order Management API",
+      "description": "Order processing and tracking",
+      "baseUrl": "https://api.techcorp.com",
+      "endpoints": [
+        {
+          "name": "get_order_status",
+          "path": "/orders/{orderId}",
+          "method": "GET",
+          "description": "Get order status and details",
+          "parameters": [
+            {
+              "name": "orderId",
+              "type": "string",
+              "required": true,
+              "description": "Order identifier",
+              "example": "ORD-67890"
+            }
+          ],
+          "responseFormat": "JSON",
+          "voiceResponseTemplate": "Your order {orderId} is currently {status} and will be delivered by {deliveryDate}."
+        }
+      ],
+      "authentication": {
+        "type": "api_key",
+        "header": "X-API-Key"
+      }
+    }
+  ],
+  "knowledgeBase": {
+    "name": "TechCorp Knowledge Base",
+    "description": "Customer support knowledge base for TechCorp Solutions",
+    "documents": [
+      {
+        "id": "company_info",
+        "title": "Company Information",
+        "content": "TechCorp Solutions is a leading provider of technology solutions for retail businesses. We offer comprehensive software, hardware, and consulting services to help businesses grow and succeed in the digital age.",
+        "category": "General",
+        "tags": ["company", "about", "overview"]
+      },
+      {
+        "id": "product_categories",
+        "title": "Product Categories",
+        "content": "We offer products in several categories: Electronics (laptops, tablets, smartphones), Software (business applications, security software), Hardware (servers, networking equipment), and Services (consulting, installation, support).",
+        "category": "Products",
+        "tags": ["products", "categories", "electronics", "software"]
+      },
+      {
+        "id": "shipping_policy",
+        "title": "Shipping and Delivery",
+        "content": "We offer free shipping on orders over $100. Standard delivery takes 3-5 business days. Express delivery (1-2 business days) is available for an additional fee. International shipping is available to select countries.",
+        "category": "Shipping",
+        "tags": ["shipping", "delivery", "policy"]
+      },
+      {
+        "id": "return_policy",
+        "title": "Returns and Exchanges",
+        "content": "We offer a 30-day return policy for most items. Items must be in original condition with packaging. Electronics have a 15-day return window. Custom orders and software are non-returnable.",
+        "category": "Returns",
+        "tags": ["returns", "exchanges", "policy"]
+      },
+      {
+        "id": "support_hours",
+        "title": "Support Hours and Contact",
+        "content": "Our support team is available 24/7 via phone (+1-800-TECHCORP), email (support@techcorp.com), and live chat. For technical issues, we also offer WhatsApp support (+1-800-TECH-HELP).",
+        "category": "Support",
+        "tags": ["support", "contact", "hours"]
+      }
+    ],
+    "categories": ["General", "Products", "Shipping", "Returns", "Support"],
+    "searchConfig": {
+      "maxResults": 3,
+      "similarityThreshold": 0.7
+    }
+  },
+  "voiceAgent": {
+    "name": "TechCorp Voice Assistant",
+    "instructions": "You are a helpful customer service representative for TechCorp Solutions. You can help customers with:\n\n- Product information and availability\n- Order status and tracking\n- Returns and exchanges\n- Shipping and delivery information\n- Technical support and troubleshooting\n- Company information and policies\n\nWhen customers ask about products or orders, use the appropriate tools to get real-time information. When they ask about policies or general information, use the knowledge base tool. Be friendly, professional, and helpful. If you need to look up information, let the customer know you're checking our systems for them.\n\nFor urgent matters or complex technical issues, always offer to connect them with our support team at +1-800-TECHCORP.",
+    "personality": {
+      "tone": "professional",
+      "language": "English",
+      "responseStyle": "conversational"
+    },
+    "capabilities": [
+      "Product information and availability",
+      "Order status and tracking",
+      "Returns and exchanges",
+      "Shipping and delivery information",
+      "Technical support and troubleshooting",
+      "Company information and policies",
+      "Account management",
+      "Billing and payment assistance"
+    ],
+    "fallbackMessage": "I'm sorry, I couldn't find that information. Please contact our support team at +1-800-TECHCORP for assistance."
+  },
+  "tools": []
+}
