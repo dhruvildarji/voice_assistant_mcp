@@ -15,7 +15,7 @@ startCommand:
     properties:
       serverUrl:
         type: string
-        default: "http://localhost:3002"
+        default: "http://localhost:3005"
         title: "Server URL"
         description: "URL of the remote MCP server"
       defaultVoiceProvider:

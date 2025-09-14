@@ -615,7 +615,7 @@ class VoiceAgentMCPServer {
   }
 
   async run() {
-    const transport = new StdioServerTransport();
+    const transport = new StdioServerThransport();
     await this.server.connect(transport);
     console.error('Voice Agent MCP Server running on stdio');
   }

@@ -66,7 +66,7 @@ class StandaloneVoiceAgentMCPServer {
     console.error(`📊 Default Voice Provider: ${this.defaultProvider}`);
     console.error(`🔑 VAPI Public Key: ${process.env.VAPI_PUBLIC_KEY ? 'Set' : 'Not Set'}`);
     console.error(`🔑 OpenAI API Key: ${process.env.OPENAI_API_KEY ? 'Set' : 'Not Set'}`);
-    console.error(`🌐 Server URL: ${process.env.SERVER_URL || 'http://localhost:3002'}`);
+    console.error(`🌐 Server URL: ${process.env.SERVER_URL || 'http://localhost:3005'}`);
     console.error('✅ Ready to accept MCP connections');
   }
 

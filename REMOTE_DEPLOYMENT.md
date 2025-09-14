@@ -40,7 +40,7 @@ Edit `.env` with your actual configuration:
 ```bash
 # Server Configuration
 NODE_ENV=production
-PORT=3002
+PORT=3005
 
 # Default Voice Provider (vapi or openai)
 DEFAULT_VOICE_PROVIDER=vapi
@@ -73,7 +73,7 @@ npm run http
 
 Check the health endpoint:
 ```bash
-curl http://localhost:3002/health
+curl http://localhost:3005/health
 ```
 
 ## Docker Deployment
@@ -107,7 +107,7 @@ curl http://localhost:3002/health
    ```bash
    docker run -d \
      --name mcp-server \
-     -p 3002:3002 \
+     -p 3005:3005 \
      -e DEFAULT_VOICE_PROVIDER=vapi \
      -e VAPI_PUBLIC_KEY=your_key \
      -e VAPI_ASSISTANT_ID=your_id \
@@ -132,15 +132,15 @@ curl http://localhost:3002/health
 
 ```bash
 # List tools
-curl -X POST http://localhost:3002/api/tools/list
+curl -X POST http://localhost:3005/api/tools/list
 
 # Call a tool
-curl -X POST http://localhost:3002/api/tools/call \
+curl -X POST http://localhost:3005/api/tools/call \
   -H "Content-Type: application/json" \
   -d '{"name": "get_server_status", "arguments": {}}'
 
 # Read a resource
-curl -X POST http://localhost:3002/api/resources/read \
+curl -X POST http://localhost:3005/api/resources/read \
   -H "Content-Type: application/json" \
   -d '{"uri": "config://server-status"}'
 ```
@@ -175,7 +175,7 @@ Set these environment variables in your production environment:
 
 ```bash
 NODE_ENV=production
-PORT=3002
+PORT=3005
 DEFAULT_VOICE_PROVIDER=vapi
 VAPI_PUBLIC_KEY=your_production_vapi_key
 VAPI_ASSISTANT_ID=your_production_assistant_id
@@ -260,7 +260,7 @@ Monitor these key metrics:
 1. **Server won't start:**
    ```bash
    # Check port availability
-   netstat -tulpn | grep 3002
+   netstat -tulpn | grep 3005
    
    # Check environment variables
    env | grep -E "(VAPI|OPENAI|DEFAULT)"
@@ -269,10 +269,10 @@ Monitor these key metrics:
 2. **MCP connection fails:**
    ```bash
    # Test MCP endpoint
-   curl -v http://localhost:3002/mcp
+   curl -v http://localhost:3005/mcp
    
    # Check CORS configuration
-   curl -H "Origin: http://localhost:3000" http://localhost:3002/health
+   curl -H "Origin: http://localhost:3000" http://localhost:3005/health
    ```
 
 3. **Docker issues:**

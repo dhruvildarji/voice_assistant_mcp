@@ -41,7 +41,7 @@ class HTTPVoiceAgentMCPServer {
   private httpServer: any;
   private port: number;
 
-  constructor(port: number = 3002) {
+  constructor(port: number = 3005) {
     this.port = port;
     this.app = express();
     
@@ -852,14 +852,14 @@ class HTTPVoiceAgentMCPServer {
 
 // Export the createServer function for Smithery
 export function createServer() {
-  const port = parseInt(process.env.PORT || '3002', 10);
+  const port = parseInt(process.env.PORT || '3005', 10);
   const server = new HTTPVoiceAgentMCPServer(port);
   return server;
 }
 
 // If running directly (not imported), start the server
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const port = parseInt(process.argv[2] || process.env.PORT || '3002', 10);
+  const port = parseInt(process.argv[2] || process.env.PORT || '3005', 10);
   const server = new HTTPVoiceAgentMCPServer(port);
   
   server.start().catch(console.error);
