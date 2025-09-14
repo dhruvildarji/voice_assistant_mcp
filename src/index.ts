@@ -45,8 +45,13 @@ class VoiceAgentMCPServer {
     this.setupHandlers();
     
     // Initialize with default provider from environment if available
-    const defaultProvider = process.env.DEFAULT_VOICE_PROVIDER as VoiceProvider || 'vapi';
-    this.defaultProvider = defaultProvider;
+    try {
+      const defaultProvider = (typeof process !== 'undefined' && process.env?.DEFAULT_VOICE_PROVIDER) as VoiceProvider || 'vapi';
+      this.defaultProvider = defaultProvider;
+    } catch (error) {
+      // Fallback to default if process is not available
+      this.defaultProvider = 'vapi';
+    }
   }
 
   private setupHandlers() {
