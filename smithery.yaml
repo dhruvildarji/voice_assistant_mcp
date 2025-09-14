@@ -1,36 +1,47 @@
 # Smithery.ai configuration for Voice Agent MCP Server
 startCommand:
   type: stdio
+  testConfig:
+    defaultVoiceProvider: "vapi"
+    vapiPublicKey: "test-key"
+    vapiAssistantId: "test-assistant"
+    vapiBaseUrl: "https://api.vapi.ai"
   configSchema:
-    # JSON Schema defining the configuration options for the MCP
     type: object
     properties:
       defaultVoiceProvider:
         type: string
         enum: ["vapi", "openai"]
         default: "vapi"
+        title: "Default Voice Provider"
         description: "Default voice provider to use (vapi or openai)"
       openaiApiKey:
         type: string
+        title: "OpenAI API Key"
         description: "OpenAI API key (required if using OpenAI provider)"
       vapiPublicKey:
         type: string
+        title: "VAPI Public Key"
         description: "VAPI public key (required if using VAPI provider)"
       vapiAssistantId:
         type: string
+        title: "VAPI Assistant ID"
         description: "VAPI assistant ID (required if using VAPI provider)"
       vapiBaseUrl:
         type: string
         default: "https://api.vapi.ai"
+        title: "VAPI Base URL"
         description: "VAPI base URL"
       openaiModel:
         type: string
         default: "gpt-4o"
+        title: "OpenAI Model"
         description: "OpenAI model to use"
       openaiVoice:
         type: string
         enum: ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
         default: "alloy"
+        title: "OpenAI Voice"
         description: "OpenAI voice to use"
     required: []
   commandFunction: |

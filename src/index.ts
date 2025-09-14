@@ -13,7 +13,7 @@ import {
   VoiceProviderConfig,
   MCPServerConfig 
 } from './types.js';
-import { readFileSync, existsSync } from 'fs-extra';
+import { readFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -43,6 +43,10 @@ class VoiceAgentMCPServer {
 
     this.configManager = new EnterpriseConfigManager();
     this.setupHandlers();
+    
+    // Initialize with default provider from environment if available
+    const defaultProvider = process.env.DEFAULT_VOICE_PROVIDER as VoiceProvider || 'vapi';
+    this.defaultProvider = defaultProvider;
   }
 
   private setupHandlers() {
